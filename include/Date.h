@@ -8,6 +8,8 @@
 #include <cmath>
 #include <algorithm>
 
+#include "Utility.h"
+
 class Date {
 private:
     int day_;
@@ -93,11 +95,5 @@ bool operator<(Date const &date, Date const &other);
 
 bool operator<=(Date const &date, Date const &other);
 
-// helper functions
-std::vector<std::string> split(std::string s, std::string delimiter);
-
-bool isNumber(std::string str);
-
-std::string padWithZeros(const std::string &str, int size);
 // we could use an enumeration to represent weekdays and months
 #endif //LIBRARY_DATE_H

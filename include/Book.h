@@ -7,6 +7,7 @@
 
 #include "ISBN10.h"
 #include "Date.h"
+#include "Utility.h"
 
 class Book {
 private:

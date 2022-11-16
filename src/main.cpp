@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
+#include <regex>
 #include "Date.h"
+#include "Utility.h"
 
 using namespace std;
 
@@ -130,6 +132,12 @@ void testDateClass() {
 }
 
 void testISBN10Class(){
+
+    string isbn = "887-521-837-4";
+
+    for(string token: tokens){
+        cout << token << endl;
+    }
 // Testing constructors
 
 // Testing setters
@@ -152,8 +160,8 @@ void testBookClass(){
 }
 
 int main() {
-    testDateClass();
+//    testDateClass();
     testISBN10Class();
-    testBookClass();
+//    testBookClass();
     return 0;
 }

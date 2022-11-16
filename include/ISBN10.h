@@ -2,6 +2,9 @@
 #define LIBRARY_ISBN10_H
 
 #include <string>
+#include <regex>
+
+#include "Utility.h"
 
 class ISBN10 {
 private:
