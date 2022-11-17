@@ -36,6 +36,7 @@ public:
 
     static Date getPreviousDate(Date const &date);
 
+    // There could be books with date of copyright unknown
     Date();
 
     Date(const Date &other);

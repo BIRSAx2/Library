@@ -1,3 +1,0 @@
-/mnt/c/Users/Mouhi/Documents/Code/Cpp/Library/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/Mouhi/Documents/Code/Cpp/Library/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/Mouhi/Documents/Code/Cpp/Library/build/CMakeFiles/Library.dir

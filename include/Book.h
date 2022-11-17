@@ -21,6 +21,13 @@ public:
 private:
     bool status_;
 public:
+    Book(const std::string &firstname, const std::string &lastname, const std::string &title);
+
+    Book(const std::string &firstname, const std::string &lastname, const std::string &title, const std::string &isbn);
+    Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn);
+
+    Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn,
+         const Date &copyrightDate);
 
     // getters
     ISBN getIsbn() const;
@@ -58,5 +65,14 @@ bool operator==(const Book &book, const Book &other);
 bool operator!=(const Book &book, const Book &other);
 
 std::ostream &operator<<(std::ostream &out, Book &book);
+
+
+struct BookAlreadyLentException : public std::exception {
+    std::string what_message;
+
+    const char *what() const throw() {
+        return "The book your are trying to lend is already lent";
+    }
+};
 
 #endif //LIBRARY_BOOK_H

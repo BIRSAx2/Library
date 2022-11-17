@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/Library.dir/src/main.cpp.o CMakeFiles/Library.dir/src/Date.cpp.o CMakeFiles/Library.dir/src/Book.cpp.o CMakeFiles/Library.dir/src/ISBN.cpp.o CMakeFiles/Library.dir/src/Utility.cpp.o  -o Library 

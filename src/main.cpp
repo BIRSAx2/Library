@@ -1,8 +1,8 @@
 #include <iostream>
 #include <iomanip>
-#include <regex>
 #include "Date.h"
 #include "ISBN.h"
+#include "Book.h"
 #include "Utility.h"
 
 using namespace std;
@@ -12,9 +12,12 @@ void testDateClass() {
     cout << "Testing constructors and << operator\n";
     Date date1 = Date{2022, 11, 16};
     Date date2 = Date{date1};
+
+    Date date = Date{};
     cout << "date1: " << date1 << '\n';
     cout << "date2 from date1: " << date2 << '\n';
     cout << "date from string '2022/11/01': " << Date{"2022/11/1"} << '\n';
+    cout << "date3: " << date << '\n';
 
 
     // Testing setters
@@ -216,6 +219,13 @@ void testBookClass() {
 
     // Testing constructors
 
+    Book a = Book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
+
+    ISBN isbn = {"0553573403"};
+    Date date = {"1997/08/04"};
+
+    Book b = Book("George", "R. R. Martin", "A Game of Thrones: A Song of Ice and Fire: Book One: 1", isbn, date);
+
     // Testing setters
 
     // Testing getters
@@ -223,11 +233,16 @@ void testBookClass() {
     // Testing lending functions
 
     // Testing operators
+
+    cout << (a == b) << endl;
+
+    cout << a << endl;
+    cout << b << endl;
 }
 
 int main() {
 //    testDateClass();
-    testISBN10Class();
-//    testBookClass();
+//    testISBN10Class();
+    testBookClass();
     return 0;
 }
