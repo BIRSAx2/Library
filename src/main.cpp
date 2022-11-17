@@ -13,11 +13,11 @@ void testDateClass() {
     Date date1 = Date{2022, 11, 16};
     Date date2 = Date{date1};
 
-    Date date = Date{};
-    cout << "date1: " << date1 << '\n';
+//    Date date = Date{};
+//    cout << "date1: " << date1 << '\n';
     cout << "date2 from date1: " << date2 << '\n';
-    cout << "date from string '2022/11/01': " << Date{"2022/11/1"} << '\n';
-    cout << "date3: " << date << '\n';
+    cout << "date from string '2022-11-01': " << Date{"2022-11-01"} << '\n';
+//    cout << "date3: " << date << '\n';
 
 
     // Testing setters
@@ -42,15 +42,15 @@ void testDateClass() {
     // Testing getters
     cout << "\nTesting getters\n";
     cout << "date: " << date1 << "\n";
-    cout << "getDay(): " << date1.getDay() << "\n";
-    cout << "getMonth(): " << date1.getMonth() << "\n";
-    cout << "getYear(): " << date1.getYear() << "\n";
+    cout << "getDay(): " << date1.day() << "\n";
+    cout << "getMonth(): " << date1.month() << "\n";
+    cout << "getYear(): " << date1.year() << "\n";
 
 
     // Testing toStringISO8601
     cout << "\nTesting to string conversions\n";
 
-    cout << "ISO8601 format: " << date1.toStringISO8601() << '\n';
+    cout << "ISO8601 format: " << date1 << '\n';
 
     // Testing static methods
     cout << "\nTesting to static methods\n";
@@ -64,55 +64,9 @@ void testDateClass() {
     cout << "isValidDate(2004,02,29): " << (Date::isValidDate(2004, 02, 29) ? "true" : "false") << '\n';
     cout << "isValidDate(2005,02,29): " << (Date::isValidDate(2005, 02, 29) ? "true" : "false") << '\n';
     cout << "isValidDate(2024,02,29): " << (Date::isValidDate(2024, 02, 29) ? "true" : "false") << '\n';
-    cout << "\ngetNextDate (2022,11,16): " << Date::getNextDate(Date{2022, 11, 16}) << '\n';
-    cout << "getPreviousDate (2022,11,16): " << Date::getPreviousDate(Date{2022, 11, 16}) << '\n';
-    cout << "getPreviousDate (2022,11,01): " << Date::getPreviousDate(Date{2022, 11, 01}) << '\n';
-    cout << "getPreviousDate (2022,01,01): " << Date::getPreviousDate(Date{2022, 01, 01}) << '\n';
-    cout << "getNextDate (2021,12,31): " << Date::getNextDate(Date{2021, 12, 31}) << '\n';
-    cout << "getNextDate (2022,02,28): " << Date::getNextDate(Date{2022, 02, 28}) << '\n';
 
-    cout <<
-         "\nCompareDates(date, other) returns:\n"
-         "<0 if date < other\n"
-         "=0 if date = other\n"
-         ">0 if date > other\n";
-
-    cout << "compareDates({2022,02,28}, {2022, 02, 27}): " << Date::compareDates({2022, 02, 28}, {2022, 02, 27})
-         << '\n';
-    cout << "compareDates({2022,02,27}, {2022, 02, 27}): " << Date::compareDates({2022, 02, 27}, {2022, 02, 27})
-         << '\n';
-    cout << "compareDates({2022,01,26}, {2022, 02, 27}): " << Date::compareDates({2022, 02, 26}, {2022, 02, 27})
-         << '\n';
-
-    // Testing unary operators
-    cout << "\nTesting unary operators \n";
-    Date date3 = {2022, 01, 01};
-    cout << "date3: " << date3 << '\n';
-    cout << "++date3: " << ++date3 << '\n';
-    date3 = {2022, 01, 01};
-    cout << "--date3: " << --date3 << '\n';
-    date3 = {2022, 01, 01};
-    date3++;
-    cout << "after date3++: " << date3 << '\n';
-    date3 = {2022, 01, 01};
-    date3--;
-    cout << "after date3--: " << date3 << '\n';
 
     // Testing comparison operators
-
-    cout << "\nTesting comparison operators\n";
-    Date a = Date{2022, 11, 16};
-    Date b = Date{2022, 11, 15};
-    Date c = Date{2022, 11, 16};
-
-    cout << a << " > " << b << ": " << ((a > b) ? "true" : "false") << '\n';
-    cout << a << " < " << b << ": " << ((a < b) ? "true" : "false") << '\n';
-    cout << a << " >= " << b << ": " << ((a >= b) ? "true" : "false") << '\n';
-    cout << a << " <= " << b << ": " << ((a <= b) ? "true" : "false") << '\n';
-    cout << a << " <= " << c << ": " << ((a <= c) ? "true" : "false") << '\n';
-    cout << a << " >= " << c << ": " << ((a >= c) ? "true" : "false") << '\n';
-    cout << a << " == " << c << ": " << ((a == c) ? "true" : "false") << '\n';
-    // Testing exceptions, uncomment one line at a time
     try {
         Date valid_date = Date(2022, 11, 16);
 //        Date invalid_date = Date{2022, 15, 16};
@@ -128,8 +82,8 @@ void testDateClass() {
 
 //valid_date.setMonth(2);
 //valid_date.setDay(29);
-    } catch (std::invalid_argument ex) {
-        cout << ex.what();
+    } catch (Date::InvalidDateException ex) {
+        cout << "Exception thrown" << endl;
     }
 
 
@@ -222,7 +176,7 @@ void testBookClass() {
     Book a = Book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
 
     ISBN isbn = {"0553573403"};
-    Date date = {"1997/08/04"};
+    Date date = {"1997-08-04"};
 
     Book b = Book("George", "R. R. Martin", "A Game of Thrones: A Song of Ice and Fire: Book One: 1", isbn, date);
 
@@ -241,7 +195,7 @@ void testBookClass() {
 }
 
 int main() {
-//    testDateClass();
+    testDateClass();
 //    testISBN10Class();
     testBookClass();
     return 0;
