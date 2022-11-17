@@ -134,22 +134,15 @@ void testDateClass() {
 
 void testISBN10Class() {
 
-//    cout << isbn10.getVersion() << endl;
-//    cout << isbn10.toString() << endl;
-//    cout << isbn10.getNormalizedISBN() << endl;
-//    isbn = "978-17-3431-450-2";
-//    ISBN isbn13 = ISBN(isbn);
-//    cout << isbn13.getVersion() << endl;
-//    cout << isbn13.toString() << endl;
-//    cout << isbn13.getNormalizedISBN() << endl;
 
-// Testing constructors
-    cout << "\nTesting constructors for ISBN version 10\n";
+// Testing constructors and getters
+    // all the constructors will throw an exception if the argument passed is not a valid ISBN12/ISBN13
+    cout << "\nTesting constructors and getters for ISBN version 10\n";
 
     string isbn = "007-462-542-X";
     cout << "Testing with a valid isbn but not normalized: " << isbn << endl;
     ISBN isbn10 = ISBN(isbn);
-    cout << "\tDetected version: " << isbn10.getVersion() << "\tParsed ISBN: " << isbn10.toString()
+    cout << "\tDetected version: " << isbn10.getVersion() << "\tParsed ISBN: " << isbn10.getISBN()
          << "\tNormalized version: " << isbn10.getNormalizedISBN() << endl;
 
 
@@ -157,14 +150,66 @@ void testISBN10Class() {
     cout << "Testing with a valid normalized version 10: " << normalizedIsbn << endl;
     ISBN isbn10FromNormalized = ISBN(normalizedIsbn);
     cout << "\tDetected version: " << isbn10FromNormalized.getVersion() << "\tParsed ISBN: "
-         << isbn10FromNormalized.toString() << "\t\tNormalized version: " << isbn10FromNormalized.getNormalizedISBN()
+         << isbn10FromNormalized.getISBN() << "\t\tNormalized version: " << isbn10FromNormalized.getNormalizedISBN()
          << endl;
 
-// Testing setters
+    cout << "\nTesting constructors and getters for ISBN version 10\n";
 
-// Testing getters
+    string isbn13String = "978-17-3431-450-2";
+    cout << "Testing with a valid isbn 13 but not normalized: " << isbn13String << endl;
+    ISBN isbn13 = ISBN(isbn13String);
+    cout << "\tDetected version: " << isbn13.getVersion() << "\tParsed ISBN: " << isbn13.getISBN()
+         << "\tNormalized version: " << isbn13.getNormalizedISBN() << endl;
+
+
+    string normalizedIsbn13 = "9781734314502";
+    cout << "Testing with a valid normalized version 13: " << normalizedIsbn13 << endl;
+    ISBN isbn13FromNormalized = ISBN(normalizedIsbn13);
+    cout << "\tDetected version: " << isbn13FromNormalized.getVersion() << "\tParsed ISBN: "
+         << isbn13FromNormalized.getISBN() << "\tNormalized version: " << isbn13FromNormalized.getNormalizedISBN()
+         << endl;
+
+
+// Testing setters
+    cout << "\nTesting setters: \n";
+
+    ISBN isbn1 = ISBN("9781734314502");
+    cout << "Before setIsbn(\"887-521-837-4\"): " << isbn1.getISBN() << endl;
+    isbn1.setIsbn("887-521-837-4");
+    cout << "\tAfter : " << isbn1.getISBN() << endl;
 
 // Testing operators
+
+    cout << "\nTesting comparison operators: \n";
+
+    ISBN isbnA = ISBN("887-521-837-4");
+    ISBN isbnB = ISBN("9781734314502");
+    ISBN isbnC = ISBN("887-521-837-4");
+    cout << isbnA << "==" << isbnB << ": " << ((isbnA == isbnB) ? "true" : "false") << endl;
+    cout << isbnA << "==" << isbnC << ": " << ((isbnA == isbnC) ? "true" : "false") << endl;
+
+    cout << isbnA << "!=" << isbnB << ": " << ((isbnA != isbnB) ? "true" : "false") << endl;
+    cout << isbnA << "!=" << isbnC << ": " << ((isbnA != isbnC) ? "true" : "false") << endl;
+
+// Testing staic methods
+    cout << "\nTesting static operators: \n";
+    cout << "ISBN validation based on version\n";
+    cout << "isValidISBN10(\"887-521-837-4\") : " << (ISBN::isValidISBN10("887-521-837-4") ? "true" : "false") << endl;
+    cout << "isValidISBN13(\"887-521-837-4\") : " << (ISBN::isValidISBN13("887-521-837-4") ? "true" : "false") << endl;
+    cout << "isValidISBN13(\"9781734314502\") : " << (ISBN::isValidISBN13("9781734314502") ? "true" : "false") << endl;
+    cout << "isValidISBN10(\"9781734314502\") : " << (ISBN::isValidISBN10("9781734314502") ? "true" : "false") << endl;
+
+    // invalid check digit
+    cout << "Wrong check digit\n";
+    cout << "isValidISBN10(\"887-521-837-9\") : " << (ISBN::isValidISBN10("887-521-837-9") ? "true" : "false") << endl;
+    cout << "isValidISBN13(\"9781734314501\") : " << (ISBN::isValidISBN13("9781734314501") ? "true" : "false") << endl;
+
+    // invalid format
+    cout << "Wrong check size\n";
+
+    cout << "isValidISBN10(\"87-521-837-4\") : " << (ISBN::isValidISBN10("87-521-837-4") ? "true" : "false") << endl;
+    cout << "isValidISBN13(\"781734314502\") : " << (ISBN::isValidISBN13("781734314502") ? "true" : "false") << endl;
+
 }
 
 void testBookClass() {

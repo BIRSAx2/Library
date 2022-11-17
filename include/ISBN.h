@@ -25,7 +25,7 @@ public:
 
     int getVersion() const;
 
-    std::string toString() const;
+    std::string getISBN() const;
     std::string getNormalizedISBN() const;
 
     static bool isValidISBN10(std::string const &normalizedISBN10);
@@ -34,6 +34,7 @@ public:
 
     ISBN& operator=(ISBN const &other);
 
+
 };
 
 
@@ -41,6 +42,6 @@ bool operator==(ISBN const &isbn10, ISBN const &other);
 
 bool operator!=(ISBN const &isbn10, ISBN const &other);
 
-bool operator<<(std::ostream &out, ISBN const &other);
+std::ostream& operator<<(std::ostream &out, ISBN const &other);
 
 #endif //LIBRARY_ISBN_H

@@ -31,7 +31,10 @@ void ISBN::setIsbn(std::string isbn) {
     normalizedIsbn_ = {isbn};
 }
 
-bool ISBN::isValidISBN10(std::string const &normalizedISBN10) {
+bool ISBN::isValidISBN10(std::string const &isbn) {
+
+    std::string normalizedISBN10 = isbn;
+    normalizedISBN10.erase(std::remove(normalizedISBN10.begin(), normalizedISBN10.end(), '-'), normalizedISBN10.end());
 
     if (normalizedISBN10.size() != 10)
         return false;
@@ -56,7 +59,11 @@ bool ISBN::isValidISBN10(std::string const &normalizedISBN10) {
     return (sum % 11 == 0);
 }
 
-bool ISBN::isValidISBN13(const std::string &normalizedIsbn13) {
+bool ISBN::isValidISBN13(const std::string &isbn) {
+
+    std::string normalizedIsbn13 = isbn;
+    normalizedIsbn13.erase(std::remove(normalizedIsbn13.begin(), normalizedIsbn13.end(), '-'), normalizedIsbn13.end());
+
     if (normalizedIsbn13.size() != 13) return false;
 
     int sum = 0;
@@ -70,19 +77,23 @@ bool ISBN::isValidISBN13(const std::string &normalizedIsbn13) {
 }
 
 bool operator==(const ISBN &isbn10, const ISBN &other) {
-    return false;
+    return isbn10.getNormalizedISBN() == other.getNormalizedISBN();
 }
 
 bool operator!=(const ISBN &isbn10, const ISBN &other) {
-    return false;
+    return !(isbn10 == other);
 }
 
-bool operator<<(std::ostream &out, const ISBN &other) {
-    return false;
+std::ostream& operator<<(std::ostream &out, const ISBN &other) {
+    out << other.getISBN();
+    return out;
 }
 
-bool ISBN::operator=(const ISBN &other) {
-    return false;
+ISBN &ISBN::operator=(const ISBN &other) {
+    version_ = other.getVersion();
+    originalIsbn_ = other.getISBN();
+    normalizedIsbn_ = other.getNormalizedISBN();
+    return *this;
 }
 
 int ISBN::getVersion() const {
@@ -90,10 +101,10 @@ int ISBN::getVersion() const {
 }
 
 
-std::string ISBN::toString() {
+std::string ISBN::getISBN() const {
     return originalIsbn_;
 }
 
-std::string ISBN::getNormalizedISBN() {
+std::string ISBN::getNormalizedISBN() const {
     return normalizedIsbn_;
 }
