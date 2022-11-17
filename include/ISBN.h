@@ -25,14 +25,14 @@ public:
 
     int getVersion() const;
 
-    std::string toString();
-    std::string getNormalizedISBN();
+    std::string toString() const;
+    std::string getNormalizedISBN() const;
 
     static bool isValidISBN10(std::string const &normalizedISBN10);
 
     static bool isValidISBN13(std::string const &isbn13);
 
-    bool operator=(ISBN const &other);
+    ISBN& operator=(ISBN const &other);
 
 };
 
