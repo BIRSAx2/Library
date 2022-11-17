@@ -5,40 +5,33 @@
 #include <stdexcept>
 #include <ostream>
 
-#include "ISBN10.h"
+#include "ISBN.h"
 #include "Date.h"
+#include "Utility.h"
 
 class Book {
 private:
-    ISBN10 isbn_;
-    std::string title_;
     std::string firstname_;
     std::string lastname_;
+    std::string title_;
+    ISBN isbn_;
     Date copyrightDate_;
+public:
+
+private:
     bool status_;
 public:
-    Book(const ISBN10 isbn, const std::string &title, const std::string &firstname, const std::string &lastname,
-         const Date &copyrightDate, bool status);
-
-    Book(const ISBN10 isbn, const std::string &title, const std::string &firstname, const std::string &lastname,
-         const Date &copyrightDate);
-
-    friend bool operator==(const Book &book, const Book &other);
-
-    friend bool operator!=(const Book &book, const Book &other);
-
-    friend std::ostream &operator<<(std::ostream &out, const Book &book);
 
     // getters
-    ISBN10 getIsbn();
+    ISBN getIsbn() const;
 
-    std::string getTitle();
+    std::string getTitle() const;
 
-    std::string getFirstname();
+    std::string getFirstname() const;
 
-    std::string getLastname();
+    std::string getLastname() const;
 
-    Date getCopyrightDate();
+    Date getCopyrightDate() const;
 
     // funzioni per registrare il prestito e la restituzione
     bool isLent() const;
@@ -49,7 +42,7 @@ public:
 
     // setters
 
-    void setIsbn(const ISBN10 &isbn);
+    void setIsbn(const ISBN &isbn);
 
     void setTitle(const std::string &title);
 
@@ -59,5 +52,11 @@ public:
 
     void setCopyrightDate(const Date &copyrightDate);
 };
+
+bool operator==(const Book &book, const Book &other);
+
+bool operator!=(const Book &book, const Book &other);
+
+std::ostream &operator<<(std::ostream &out, Book &book);
 
 #endif //LIBRARY_BOOK_H
