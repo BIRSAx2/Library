@@ -1,174 +1,120 @@
 #include "Date.h"
 
-Date::Date(){
-    year_ = 0;
-    month_ = 0;
-    day_ = 0;
+bool Date::isLeapYear(int year) {
+    return ((year % 4 == 0) && (year % 100 != 0)) || year % 400 == 0;
+
 }
 
-Date::Date(int year, int month, int day) : day_(day), month_(month), year_(year) {
-    if (!isValidDate(year, month, day)) throw std::invalid_argument("Invalid Date");
-}
+Date::Date() : year_{0}, month_{0}, day_{0} {}
 
-Date::Date(const Date &other) {
-    year_ = other.year_;
-    month_ = other.month_;
-    day_ = other.day_;
-}
+bool Date::isValidDate(int year, int month, int day) {
+    // check year
+    if (year < 0)
+        return false;
 
-Date::Date(std::string date) {
-    std::vector<std::string> parsed = split(date, "/");
+    // check month
+    if (month < 1 || month > 12)
+        return false;
 
-    if (parsed.size() != 3) throw std::invalid_argument("Invalid date format");
-    for (std::string &s: parsed) {
-        if (!isNumber(s)) throw std::invalid_argument("Invalid number format");
+    // check day
+    if (day < 1 || day > 31)
+        return false;
+
+    // check february correctness
+    if (month == 2) {
+        if (isLeapYear(year))
+            return day <= 29;
+        else
+            return day <= 28;
     }
-    int year = std::stoi(parsed.at(0));
-    int month = std::stoi(parsed.at(1));
-    int day = std::stoi(parsed.at(2));
 
-    if (!isValidDate(year, month, day)) throw std::invalid_argument("Invalid date");
+    // other months
+    if (month == 4 || month == 6 || month == 9 || month == 11)
+        return day <= 30;
 
-    year_ = {year};
-    month_ = {month};
-    day_ = {day};
-
+    return true;
 }
 
-std::string Date::toStringISO8601() const {
-    // lo standard ISO8601 definisce la data come yyyy/mm/dd
+// ISO8061:YYYY-MM-DD
+bool Date::isValidISO8061(const std::string &str) {
+    if (str.length() != 10)
+        return false;
 
-    std::string year = std::to_string(year_);
-    std::string month = std::to_string(month_);
-    std::string day = std::to_string(day_);
-    // TODO: refactor this, extract the padding to a function
-    return padWithZeros(year, 4) + "/"
-           + padWithZeros(month, 2) + "/"
-           + padWithZeros(day, 2);
+    if (str[4] != '-' || str[7] != '-')
+        return false;
+
+    return true;
 }
 
-void Date::setDate(int year, int month, int day) {
-    if (!Date::isValidDate(year, month, day)) throw std::invalid_argument("Invalid Date");
+Date::Date(int year, int month, int day) : year_{year}, month_{month}, day_{day} {
+    if (!isValidDate(year, month, day))
+        throw InvalidDateException();
+}
+
+Date::Date(const std::string &other) {
+    if (!isValidISO8061(other))
+        throw InvalidDateException();
+
+    int year, month, day;
+    try {
+        year = std::stoi(other.substr(0, 4));
+        month = std::stoi(other.substr(5, 2));
+        day = std::stoi(other.substr(8, 2));
+    }
+    catch (const std::exception &e) {
+        throw InvalidDateException();
+    }
+
+    if (!isValidDate(year, month, day))
+        throw InvalidDateException();
+
     year_ = year;
     month_ = month;
     day_ = day;
 }
 
-void Date::setDay(int day) {
-    if (!Date::isValidDate(year_, month_, day)) throw std::invalid_argument("Invalid day");
-    day_ = day;
-}
+Date::Date(const Date &other) : year_{other.year_}, month_{other.month_}, day_{other.day_} {}
 
-void Date::setMonth(int month) {
-    if (!Date::isValidDate(year_, month, day_)) throw std::invalid_argument("Invalid month");
+void Date::setDate(int year, int month, int day) {
+    if (!isValidDate(year, month, day))
+        throw InvalidDateException();
+
+    year_ = year;
     month_ = month;
+    day_ = day;
 }
 
 void Date::setYear(int year) {
-    if (!Date::isValidDate(year, month_, day_)) throw new std::invalid_argument("Invalid year");
+    if (!isValidDate(year, month_, day_))
+        throw InvalidDateException();
+
     year_ = year;
 }
 
-Date &Date::operator=(Date const &other) {
-    day_ = other.getDay();
-    month_ = other.getMonth();
-    year_ = other.getYear();
-    return *this;
+void Date::setMonth(int month) {
+    if (!isValidDate(year_, month, day_))
+        throw InvalidDateException();
+
+    month_ = month;
 }
 
-// Comparisons
-int Date::compareDates(Date const &date, Date const &other) {
-    if (date.getYear() != other.getYear()) return date.getYear() - other.getYear();
-    if (date.getMonth() != other.getMonth()) return date.getMonth() - other.getMonth();
-    return date.getDay() - other.getDay();
-}
+void Date::setDay(int day) {
+    if (!isValidDate(year_, month_, day))
+        throw InvalidDateException();
 
-bool operator<(Date const &date, Date const &other) {
-    int comparison = Date::compareDates(date, other);
-    return comparison < 0;
-}
-
-bool operator<=(Date const &date, Date const &other) {
-    return date < other || date == other;
-}
-
-bool operator>(Date const &date, Date const &other) {
-    int comparison = Date::compareDates(date, other);
-    return comparison > 0;
-}
-
-bool operator>=(Date const &date, Date const &other) {
-    return date > other || date == other;
+    day_ = day;
 }
 
 bool operator==(Date const &date, Date const &other) {
-    return Date::compareDates(date, other) == 0;
+    return (date.year() == other.year() && date.month() == other.month() && date.day() == other.day());
 }
 
 bool operator!=(Date const &date, Date const &other) {
     return !(date == other);
 }
 
-bool Date::isLeapYear(int year) {
-    // Calendario Gregoriano
-    return ((year % 4 == 0) && (year % 100 != 0)) || year % 400 == 0;
-}
-
-bool Date::isValidDate(int year, int month, int day) {
-    if (year < 0 || month > 12 || month < 1 || day < 1) return false;
-    // check for leap year
-    if (month == 2 && Date::isLeapYear(year) && day > Date::MONTH_LENGHTS[month] + 1) return false;
-
-    if (!Date::isLeapYear(year) && day > Date::MONTH_LENGHTS[month]) return false;
-
-    return true;
-}
-
-Date &Date::operator++() {
-    Date date = *this;
-    *this = getNextDate(date);
-    return *this;
-}
-
-Date &Date::operator--() {
-    Date date = *this;
-    *this = getPreviousDate(date);
-    return *this;
-}
-
-Date &Date::operator--(int) {
-    Date date = *this;
-    *this = getPreviousDate(date);
-    return date;
-}
-
-Date &Date::operator++(int) {
-    Date date = *this;
-    *this = getNextDate(date);
-    return date;
-}
-
-Date Date::getNextDate(const Date &date) {
-    if (isValidDate(date.getYear(), date.getMonth(), date.getDay() + 1))
-        return Date{date.getYear(), date.getMonth(), date.getDay() + 1};
-
-    if (isValidDate(date.getYear(), date.getMonth() + 1, 1))
-        return Date{date.getYear(), date.getMonth() + 1, 1};
-
-    return Date{date.getYear() + 1, 1, 1};
-}
-
-Date Date::getPreviousDate(const Date &date) {
-
-    if (isValidDate(date.getYear(), date.getMonth(), date.getDay() - 1))
-        return Date{date.getYear(), date.getMonth(), date.getDay() - 1};
-    if (date.getMonth() - 1 > 0 &&
-        isValidDate(date.getYear(), date.getMonth() - 1, Date::MONTH_LENGHTS[date.getMonth() - 1]))
-        return Date{date.getYear(), date.getMonth() - 1, Date::MONTH_LENGHTS[date.getMonth() - 1]};
-
-    return Date{date.getYear() - 1, 12, 31};
-}
-
 std::ostream &operator<<(std::ostream &os, Date const &date) {
-    return os << date.toStringISO8601();
+    return os << padWithZeros(std::to_string(date.year()), 4) << "-" << padWithZeros(std::to_string(date.month()), 2)
+              << "-" << padWithZeros(std::to_string(date.day()), 2);
 }
+

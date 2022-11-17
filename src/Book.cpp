@@ -29,7 +29,7 @@ bool Book::isLent() const {
 }
 
 void Book::lendBook() {
-    if (status_) throw std::invalid_argument("Cannot lend this book: it's already lent.");
+    if (status_) throw BookAlreadyLentException();
     status_ = true;
 }
 
@@ -53,10 +53,23 @@ void Book::setCopyrightDate(const Date &copyrightDate) {
     copyrightDate_ = copyrightDate;
 }
 
+Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title) :
+        firstname_(firstname), lastname_(lastname), title_(title) {}
+
+Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title, const std::string &isbn)
+        : firstname_(firstname), lastname_(lastname), title_(title), isbn_(isbn) {}
+
+Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn)
+        : firstname_(firstname), lastname_(lastname), title_(title), isbn_(isbn) {}
+
+Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn,
+           const Date &copyrightDate) :
+        firstname_(firstname), lastname_(lastname), title_(title), isbn_(isbn), copyrightDate_(copyrightDate) {}
+
 
 std::ostream &operator<<(std::ostream &out, Book &book) {
     return out << book.getTitle() << '\n' << book.getFirstname() << " " << book.getLastname() << "\n"
-               //    << book.getIsbn() << "\n"
+               << book.getIsbn() << "\n"
                << book.getCopyrightDate();
 }
 

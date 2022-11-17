@@ -10,7 +10,7 @@ $ cd build
 # Generate build files
 $ cmake ../
 # Build the executable
-$ cmake -build .
+$ cmake --build .
 
 # Run the executable
 $ ./Library
