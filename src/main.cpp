@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <regex>
 #include "Date.h"
+#include "ISBN.h"
 #include "Utility.h"
 
 using namespace std;
@@ -31,7 +32,7 @@ void testDateClass() {
     cout << "setYear(2001): ";
     cout << date1 << '\n';
 
-    date1.setDate(2001,02,20);
+    date1.setDate(2001, 02, 20);
     cout << "setDate(2001,02,20): ";
     cout << date1 << '\n';
 
@@ -131,14 +132,33 @@ void testDateClass() {
 
 }
 
-void testISBN10Class(){
+void testISBN10Class() {
 
-    string isbn = "887-521-837-4";
+//    cout << isbn10.getVersion() << endl;
+//    cout << isbn10.toString() << endl;
+//    cout << isbn10.getNormalizedISBN() << endl;
+//    isbn = "978-17-3431-450-2";
+//    ISBN isbn13 = ISBN(isbn);
+//    cout << isbn13.getVersion() << endl;
+//    cout << isbn13.toString() << endl;
+//    cout << isbn13.getNormalizedISBN() << endl;
 
-    for(string token: tokens){
-        cout << token << endl;
-    }
 // Testing constructors
+    cout << "\nTesting constructors for ISBN version 10\n";
+
+    string isbn = "007-462-542-X";
+    cout << "Testing with a valid isbn but not normalized: " << isbn << endl;
+    ISBN isbn10 = ISBN(isbn);
+    cout << "\tDetected version: " << isbn10.getVersion() << "\tParsed ISBN: " << isbn10.toString()
+         << "\tNormalized version: " << isbn10.getNormalizedISBN() << endl;
+
+
+    string normalizedIsbn = "007462542X";
+    cout << "Testing with a valid normalized version 10: " << normalizedIsbn << endl;
+    ISBN isbn10FromNormalized = ISBN(normalizedIsbn);
+    cout << "\tDetected version: " << isbn10FromNormalized.getVersion() << "\tParsed ISBN: "
+         << isbn10FromNormalized.toString() << "\t\tNormalized version: " << isbn10FromNormalized.getNormalizedISBN()
+         << endl;
 
 // Testing setters
 
@@ -146,7 +166,8 @@ void testISBN10Class(){
 
 // Testing operators
 }
-void testBookClass(){
+
+void testBookClass() {
 
     // Testing constructors
 

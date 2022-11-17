@@ -23,3 +23,7 @@ bool isNumber(std::string str) {
 std::string padWithZeros(const std::string &str, int size) {
     return std::string(size - std::min((int) str.size(), size), '0').append(str);
 }
+
+std::string replaceAll(std::string &str, char toBeReplace, char replacement) {
+    std::replace(str.begin(), str.end(), toBeReplace, replacement);
+}

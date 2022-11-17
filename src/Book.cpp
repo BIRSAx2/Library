@@ -1,6 +1,6 @@
 #include "Book.h"
 
-ISBN10 Book::getIsbn() const {
+ISBN Book::getIsbn() const {
     return isbn_;
 }
 
@@ -33,7 +33,7 @@ void Book::lendBook() {
     status_ = true;
 }
 
-void Book::setIsbn(const ISBN10 &isbn) {
+void Book::setIsbn(const ISBN &isbn) {
     isbn_ = isbn;
 }
 

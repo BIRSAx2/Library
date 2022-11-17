@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <ostream>
 
-#include "ISBN10.h"
+#include "ISBN.h"
 #include "Date.h"
 #include "Utility.h"
 
@@ -14,7 +14,7 @@ private:
     std::string firstname_;
     std::string lastname_;
     std::string title_;
-    ISBN10 isbn_;
+    ISBN isbn_;
     Date copyrightDate_;
 public:
 
@@ -23,7 +23,7 @@ private:
 public:
 
     // getters
-    ISBN10 getIsbn() const;
+    ISBN getIsbn() const;
 
     std::string getTitle() const;
 
@@ -42,7 +42,7 @@ public:
 
     // setters
 
-    void setIsbn(const ISBN10 &isbn);
+    void setIsbn(const ISBN &isbn);
 
     void setTitle(const std::string &title);
 
