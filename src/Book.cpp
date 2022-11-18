@@ -34,7 +34,7 @@ void Book::LendBook() {
 }
 
 void Book::SetIsbn(const ISBN &isbn) {
-    isbn_ = isbn;
+    isbn_ = {isbn};
 }
 
 void Book::SetTitle(const std::string &title) {
