@@ -215,7 +215,11 @@ void testBookClass() {
 
 int main() {
   //  testDateClass();
-  testISBNClass();
+  //  testISBNClass();
   //  testBookClass();
+  std::vector<Book> shelf(10);
+  Book my_favourite_book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
+
+  cout << my_favourite_book;
   return 0;
 }

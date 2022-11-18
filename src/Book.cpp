@@ -65,7 +65,8 @@ Book::Book(const std::string &firstname, const std::string &lastname, const std:
 Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn,
            const Date &copyrightDate) :
         firstname_(firstname), lastname_(lastname), title_(title), isbn_(isbn), copyrightDate_(copyrightDate) {}
-
+Book::Book() {
+}
 
 std::ostream &operator<<(std::ostream &out, Book &book) {
     return out << book.GetTitle() << '\n' << book.GetFirstname() << " " << book.GetLastname() << "\n"

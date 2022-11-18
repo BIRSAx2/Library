@@ -11,14 +11,15 @@
 
 class Book {
 private:
-    std::string firstname_;
+ std::string firstname_;
     std::string lastname_;
     std::string title_;
     ISBN isbn_;
     Date copyrightDate_;
 public:
+	Book();
 
-private:
+   private:
     bool status_;
 public:
     Book(const std::string &firstname, const std::string &lastname, const std::string &title);
