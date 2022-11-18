@@ -170,23 +170,61 @@ void testBookClass() {
   Date date = {"1997-08-04"};
 
   Book b = Book("George", "R. R. Martin", "A Game of Thrones: A Song of Ice and Fire: Book One: 1", isbn, date);
+  cout << "Book a: \n"
+	   << a << endl;
+  cout << "Book b: \n"
+	   << b << endl;
 
-  // Testing setters
+  // Testing setters and getters
+  cout << "\nTesting setters and getters:\n";
 
-  // Testing getters
+  cout << "Book a after \n"
+		  "a.SetTitle(\"Title changed\")\n"
+		  "a.SetFirstname(\"Firstname changed\")\n"
+		  "a.SetLastname(\"Lastname changed\")\n"
+		  "a.SetCopyrightDate(Date{\"2022-11-20\"})\n"
+		  "a.SetIsbn(ISBN{\"007-462-542-X\"})"
+		  ":\n";
+  a.SetTitle("Title changed");
+  a.SetLastname("Lastname changed");
+  a.SetFirstname("Firstname changed");
+  a.SetCopyrightDate(Date{"2022-11-20"});
+  a.SetIsbn(ISBN{"007-462-542-X"});
+  cout << a.GetTitle() << endl;
+  cout << a.GetLastname() << endl;
+  cout << a.GetFirstname() << endl;
+  cout << a.GetCopyrightDate() << endl;
+  cout << a.GetIsbn() << endl;
 
   // Testing lending functions
 
-  // Testing operators
+  cout << "\nTesting lending functions:\n";
+  cout << "a.IsLent(): " << (a.IsLent() ? "true" : "false");
+  a.LendBook();
+  cout << "a.IsLent() after a.LendBook(): " << (a.IsLent() ? "true" : "false");
 
-  cout << (a == b) << endl;
+  try {
+	cout << "\nTrying to lend a book already lent, should throw a BookAlreadyLentException\n";
+	a.LendBook();
 
-  cout << a << endl;
-  cout << b << endl;
+  } catch (BookAlreadyLentException &ex) {
+	cout << "Catched Exception: " << ex.what() << endl;
+  }
+
+  a.ReturnBook();
+  cout << "a.IsLent() after a.ReturnBook(): " << (a.IsLent() ? "true" : "false") << '\n';
+
+  // Testing comparison operators
+  cout << "\nTesting comparison operators:\n";
+
+  cout << "Book a == Book b"
+	   << " : " << (a == b ? "true" : "false") << '\n';
+  cout << "Book a != Book b"
+	   << " : " << (a != b ? "true" : "false") << '\n';
 }
 
 int main() {
-  testDateClass();
+  //  testDateClass();
   //    testISBN10Class();
   testBookClass();
   return 0;

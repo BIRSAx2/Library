@@ -31,9 +31,9 @@ void ISBN::SetIsbn(std::string isbn) {
     normalizedIsbn_ = {isbn};
 }
 
-bool ISBN::IsValidIsbn10(std::string const &normalizedISBN10) {
+bool ISBN::IsValidIsbn10(std::string const &isbn) {
 
-    std::string normalizedISBN10 = normalizedISBN10;
+    std::string normalizedISBN10 = isbn;
     normalizedISBN10.erase(std::remove(normalizedISBN10.begin(), normalizedISBN10.end(), '-'), normalizedISBN10.end());
 
     if (normalizedISBN10.size() != 10)

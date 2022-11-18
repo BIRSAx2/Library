@@ -67,9 +67,9 @@ bool operator!=(const Book &book, const Book &other);
 std::ostream &operator<<(std::ostream &out, Book &book);
 
 
-struct BookAlreadyLentException : public std::exception {
+class BookAlreadyLentException : public std::exception {
     std::string what_message;
-
+   public:
     const char *what() const throw() {
         return "The book your are trying to lend is already lent";
     }
