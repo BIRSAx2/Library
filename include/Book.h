@@ -30,34 +30,34 @@ public:
          const Date &copyrightDate);
 
     // getters
-    ISBN getIsbn() const;
+    ISBN GetIsbn() const;
 
-    std::string getTitle() const;
+    std::string GetTitle() const;
 
-    std::string getFirstname() const;
+    std::string GetFirstname() const;
 
-    std::string getLastname() const;
+    std::string GetLastname() const;
 
-    Date getCopyrightDate() const;
+    Date GetCopyrightDate() const;
 
     // funzioni per registrare il prestito e la restituzione
-    bool isLent() const;
+    bool IsLent() const;
 
-    void lendBook();
+    void LendBook();
 
-    void returnBook();
+    void ReturnBook();
 
     // setters
 
-    void setIsbn(const ISBN &isbn);
+    void SetIsbn(const ISBN &isbn);
 
-    void setTitle(const std::string &title);
+    void SetTitle(const std::string &title);
 
-    void setFirstname(const std::string &firstname);
+    void SetFirstname(const std::string &firstname);
 
-    void setLastname(const std::string &lastname);
+    void SetLastname(const std::string &lastname);
 
-    void setCopyrightDate(const Date &copyrightDate);
+    void SetCopyrightDate(const Date &copyrightDate);
 };
 
 bool operator==(const Book &book, const Book &other);

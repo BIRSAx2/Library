@@ -1,55 +1,55 @@
 #include "Book.h"
 
-ISBN Book::getIsbn() const {
+ISBN Book::GetIsbn() const {
     return isbn_;
 }
 
-std::string Book::getTitle() const {
+std::string Book::GetTitle() const {
     return title_;
 }
 
-std::string Book::getFirstname() const {
+std::string Book::GetFirstname() const {
     return firstname_;
 }
 
-std::string Book::getLastname() const {
+std::string Book::GetLastname() const {
     return lastname_;
 }
 
-Date Book::getCopyrightDate() const {
+Date Book::GetCopyrightDate() const {
     return copyrightDate_;
 }
 
-void Book::returnBook() {
+void Book::ReturnBook() {
     status_ = false;
 }
 
-bool Book::isLent() const {
+bool Book::IsLent() const {
     return status_;
 }
 
-void Book::lendBook() {
+void Book::LendBook() {
     if (status_) throw BookAlreadyLentException();
     status_ = true;
 }
 
-void Book::setIsbn(const ISBN &isbn) {
+void Book::SetIsbn(const ISBN &isbn) {
     isbn_ = isbn;
 }
 
-void Book::setTitle(const std::string &title) {
+void Book::SetTitle(const std::string &title) {
     title_ = title;
 }
 
-void Book::setFirstname(const std::string &firstname) {
+void Book::SetFirstname(const std::string &firstname) {
     firstname_ = firstname;
 }
 
-void Book::setLastname(const std::string &lastname) {
+void Book::SetLastname(const std::string &lastname) {
     lastname_ = lastname;
 }
 
-void Book::setCopyrightDate(const Date &copyrightDate) {
+void Book::SetCopyrightDate(const Date &copyrightDate) {
     copyrightDate_ = copyrightDate;
 }
 
@@ -68,13 +68,13 @@ Book::Book(const std::string &firstname, const std::string &lastname, const std:
 
 
 std::ostream &operator<<(std::ostream &out, Book &book) {
-    return out << book.getTitle() << '\n' << book.getFirstname() << " " << book.getLastname() << "\n"
-               << book.getIsbn() << "\n"
-               << book.getCopyrightDate();
+    return out << book.GetTitle() << '\n' << book.GetFirstname() << " " << book.GetLastname() << "\n"
+               << book.GetIsbn() << "\n"
+               << book.GetCopyrightDate();
 }
 
 bool operator==(const Book &book, const Book &other) {
-    return book.getIsbn() == other.getIsbn();
+    return book.GetIsbn() == other.GetIsbn();
 }
 
 bool operator!=(const Book &book, const Book &other) {

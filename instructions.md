@@ -5,7 +5,7 @@
         - ISBN
         - Titolo: std::string, validazione: non vuoto
         - Nome e cognome dell'autore, con validazione: vuoto,in caso di mancanza unknown-unknown
-        - Data di copyright: classe date
+        - Data di copyright: classe SetDate
         - Stato: bool
         - Funzioni per registrare il prestito e la restituzione
         - Overload degli operatori di confronto e output

@@ -21,16 +21,16 @@ public:
     ISBN();
     ISBN(std::string isbn);
 
-    void setIsbn(std::string isbn);
+    void SetIsbn(std::string isbn);
 
-    int getVersion() const;
+    int GetVersion() const;
 
-    std::string getISBN() const;
-    std::string getNormalizedISBN() const;
+    std::string GetIsbn() const;
+    std::string GetNormalizedIsbn() const;
 
-    static bool isValidISBN10(std::string const &normalizedISBN10);
+    static bool IsValidIsbn10(std::string const &normalizedISBN10);
 
-    static bool isValidISBN13(std::string const &isbn13);
+    static bool IsValidIsbn13(std::string const &isbn13);
 
     ISBN& operator=(ISBN const &other);
 
