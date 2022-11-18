@@ -197,6 +197,6 @@ void testBookClass() {
 int main() {
     testDateClass();
 //    testISBN10Class();
-//    testBookClass();
+    testBookClass();
     return 0;
 }
