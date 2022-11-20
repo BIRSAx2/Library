@@ -21,4 +21,4 @@ Abbiamo deciso di seguire la Google C++ Code Style, con un piccolo cambiamento n
 (chiamati accessors/mutators nella guida). Abbiamo utilizzato la stessa nomenclatura utilizzata per le funzioni
 ordinarie ("Functions should start with a capital letter and have a capital letter for each new word.") per essere
 più consistenti con la naming convention generale. Dopo aver consultato qualche progetto opensource in C++ di Google
-abbiamo verificato che questo è lo stesso approccio preso da loro nei progetto che abbiamo consultato.
+abbiamo verificato che questo è lo stesso approccio preso da loro nei progetti che abbiamo consultato.

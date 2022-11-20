@@ -16,11 +16,13 @@ class Book {
   std::string title_;
   ISBN isbn_;
   Date copyrightDate_;
-
- private:
   bool available_;
 
  public:
+
+  // it's doesn't make sense to create and empty book, but as of requirements by the professor we needed to implement an empty constructor in order to instantiate a vector with a size of 10
+  Book();
+
   Book(Book const &book);
 
   Book(const std::string &firstname, const std::string &lastname, const std::string &title);
@@ -61,7 +63,15 @@ class Book {
   void SetLastname(const std::string &lastname);
 
   void SetCopyrightDate(const Date &copyrightDate);
-  Book();
+
+  class BookAlreadyLentException : public std::exception {
+	std::string what_message;
+
+   public:
+	const char *what() const throw() {
+	  return "The book your are trying to lend is already lent";
+	}
+  };
 };
 
 bool operator==(const Book &book, const Book &other);
@@ -69,14 +79,5 @@ bool operator==(const Book &book, const Book &other);
 bool operator!=(const Book &book, const Book &other);
 
 std::ostream &operator<<(std::ostream &out, Book &book);
-
-class BookAlreadyLentException : public std::exception {
-  std::string what_message;
-
- public:
-  const char *what() const throw() {
-	return "The book your are trying to lend is already lent";
-  }
-};
 
 #endif//LIBRARY_BOOK_H

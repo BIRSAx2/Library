@@ -197,7 +197,7 @@ void testBookClass() {
   try {
 	cout << "\nTrying to lend a book already lent, should throw a BookAlreadyLentException\n";
 	a.LendBook();
-  } catch (BookAlreadyLentException &ex) {
+  } catch (Book::BookAlreadyLentException &ex) {
 	cout << "Catched Exception: " << ex.what() << endl;
   }
 
@@ -214,12 +214,28 @@ void testBookClass() {
 }
 
 int main() {
+
+  // professors tests
+  std::vector<Book> shelf(10);
+  Book my_favourite_book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
+
+  // our tests
+
   //  testDateClass();
   //  testISBNClass();
   //  testBookClass();
-  std::vector<Book> shelf(10);
-  Book my_favourite_book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
-  shelf.push_back(my_favourite_book);
-  cout << my_favourite_book << '\n';
+
+  std::vector<Book> books;
+  books.push_back(my_favourite_book);
+
+  ISBN isbn = {"0553573403"};
+  Date date = {"1997-08-04"};
+
+  Book b = Book("George", "R. R. Martin", "A Game of Thrones: A Song of Ice and Fire: Book One: 1", isbn, date);
+  books.push_back(b);
+
+  for (Book book : books) {
+	cout << book << "\n\n";
+  }
   return 0;
 }

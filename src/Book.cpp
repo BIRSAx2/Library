@@ -53,10 +53,11 @@ void Book::SetCopyrightDate(const Date &copyrightDate) {
   copyrightDate_ = copyrightDate;
 }
 
-Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title) : firstname_(firstname),
-																								  lastname_(lastname),
-																								  title_(title),
-																								  available_(true) {}
+Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title)
+	: firstname_(firstname),
+	  lastname_(lastname),
+	  title_(title),
+	  available_(true) {}
 
 Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title, const std::string &isbn)
 	: firstname_(firstname),
@@ -72,13 +73,14 @@ Book::Book(const std::string &firstname, const std::string &lastname, const std:
 	  isbn_(isbn),
 	  available_(true) {}
 
-Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn,
-		   const Date &copyrightDate) : firstname_(firstname),
-										lastname_(lastname),
-										title_(title),
-										isbn_(isbn),
-										copyrightDate_(copyrightDate),
-										available_(true) {}
+Book::Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn, const Date &copyrightDate)
+	: firstname_(firstname),
+	  lastname_(lastname),
+	  title_(title),
+	  isbn_(isbn),
+	  copyrightDate_(copyrightDate),
+	  available_(true) {}
+
 Book::Book(Book const &book) {
   firstname_ = book.GetFirstname();
   lastname_ = book.GetLastname();
@@ -87,6 +89,7 @@ Book::Book(Book const &book) {
   isbn_ = book.GetIsbn();
   available_ = book.IsLent();
 }
+
 Book::Book() {
   firstname_ = "";
   lastname_ = "";
