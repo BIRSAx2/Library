@@ -1,10 +1,6 @@
-#include <iomanip>
 #include <iostream>
 
 #include "Book.h"
-#include "Date.h"
-#include "ISBN.h"
-#include "Utility.h"
 
 using namespace std;
 
@@ -156,6 +152,7 @@ void testISBNClass() {
 
 void testBookClass() {
 
+  cout << "Book class" << '\n';
   // Testing constructors
 
   Book a = Book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
@@ -219,7 +216,7 @@ void testBookClass() {
 int main() {
   //  testDateClass();
   //  testISBNClass();
-  testBookClass();
+  //  testBookClass();
   std::vector<Book> shelf(10);
   Book my_favourite_book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
   shelf.push_back(my_favourite_book);
