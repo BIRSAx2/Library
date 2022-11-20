@@ -9,13 +9,15 @@
 using namespace std;
 
 void testDateClass() {
+  cout << "Date Class" << '\n';
   // Testing constructors and stream operators
   cout << "Testing constructors and << operator\n";
   Date date1 = Date{2022, 11, 16};
   Date date2 = Date{date1};
 
-  //    Date SetDate = Date{};
-  //    cout << "date1: " << date1 << '\n';
+  Date emptyDate = Date{};
+  cout << "date1:" << date1 << '\n';
+  cout << "emptyDate: " << emptyDate << '\n';
   cout << "date2 from date1: " << date2 << '\n';
   cout << "Date from string '2022-11-01': " << Date{"2022-11-01"} << '\n';
   //    cout << "date3: " << SetDate << '\n';
@@ -65,28 +67,30 @@ void testDateClass() {
   cout << "IsValidDate(2024,02,29): " << (Date::IsValidDate(2024, 02, 29) ? "true" : "false") << '\n';
 
   // Testing comparison operators
+  // uncomment to test exceptions
+
   try {
 	Date valid_date = Date(2022, 11, 16);
-	//        Date invalid_date = Date{2022, 15, 16};
+	//	Date invalid_date = Date{2022, 15, 16};
 
-	//        valid_date.SetYear(-1);
+	//	valid_date.SetYear(-1);
 
-	//        valid_date.month(-1);
+	//	valid_date.SetMonth(-1);
 
-	//        valid_date.month(13);
+	//	valid_date.SetMonth(13);
 
-	//        valid_date.GetDay(-1);
-	//        valid_date.GetDay(40);
+	//	valid_date.SetDay(-1);
+	//	valid_date.SetDay(40);
 
-	//valid_date.month(2);
-	//valid_date.GetDay(29);
+	//	valid_date.SetMonth(2);
+	//	valid_date.SetDay(29);
   } catch (Date::InvalidDateException ex) {
 	cout << "Exception thrown" << endl;
   }
 }
 
 void testISBNClass() {
-
+  cout << "ISBN class" << '\n';
   // Testing constructors and getters
   // all the constructors will throw an exception if the argument passed is not a valid ISBN12/ISBN13
   cout << "\nTesting constructors and getters for ISBN version 10\n";
@@ -189,14 +193,13 @@ void testBookClass() {
   // Testing lending functions
 
   cout << "\nTesting lending functions:\n";
-  cout << "a.IsLent(): " << (a.IsLent() ? "true" : "false");
+  cout << "a.IsLent(): " << (a.IsLent() ? "true" : "false") << '\n';
   a.LendBook();
-  cout << "a.IsLent() after a.LendBook(): " << (a.IsLent() ? "true" : "false");
+  cout << "a.IsLent() after a.LendBook(): " << (a.IsLent() ? "true" : "false") << '\n';
 
   try {
 	cout << "\nTrying to lend a book already lent, should throw a BookAlreadyLentException\n";
 	a.LendBook();
-
   } catch (BookAlreadyLentException &ex) {
 	cout << "Catched Exception: " << ex.what() << endl;
   }
@@ -216,10 +219,10 @@ void testBookClass() {
 int main() {
   //  testDateClass();
   //  testISBNClass();
-  //  testBookClass();
+  testBookClass();
   std::vector<Book> shelf(10);
   Book my_favourite_book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
-
-  cout << my_favourite_book;
+  shelf.push_back(my_favourite_book);
+  cout << my_favourite_book << '\n';
   return 0;
 }

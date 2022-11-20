@@ -1,64 +1,67 @@
 #ifndef LIBRARY_BOOK_H
 #define LIBRARY_BOOK_H
 
-#include <string>
-#include <stdexcept>
 #include <ostream>
+#include <stdexcept>
+#include <string>
 
-#include "ISBN.h"
 #include "Date.h"
+#include "ISBN.h"
 #include "Utility.h"
 
 class Book {
-private:
- std::string firstname_;
-    std::string lastname_;
-    std::string title_;
-    ISBN isbn_;
-    Date copyrightDate_;
-public:
-	Book();
+ private:
+  std::string firstname_;
+  std::string lastname_;
+  std::string title_;
+  ISBN isbn_;
+  Date copyrightDate_;
 
-   private:
-    bool status_;
-public:
-    Book(const std::string &firstname, const std::string &lastname, const std::string &title);
+ private:
+  bool available_;
 
-    Book(const std::string &firstname, const std::string &lastname, const std::string &title, const std::string &isbn);
-    Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn);
+ public:
+  Book(Book const &book);
 
-    Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn,
-         const Date &copyrightDate);
+  Book(const std::string &firstname, const std::string &lastname, const std::string &title);
 
-    // getters
-    ISBN GetIsbn() const;
+  Book(const std::string &firstname, const std::string &lastname, const std::string &title, const std::string &isbn);
 
-    std::string GetTitle() const;
+  Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn);
 
-    std::string GetFirstname() const;
+  Book(const std::string &firstname, const std::string &lastname, const std::string &title, const ISBN &isbn,
+	   const Date &copyrightDate);
 
-    std::string GetLastname() const;
+  // getters
+  ISBN GetIsbn() const;
 
-    Date GetCopyrightDate() const;
+  std::string GetTitle() const;
 
-    // funzioni per registrare il prestito e la restituzione
-    bool IsLent() const;
+  std::string GetFirstname() const;
 
-    void LendBook();
+  std::string GetLastname() const;
 
-    void ReturnBook();
+  Date GetCopyrightDate() const;
 
-    // setters
+  // funzioni per registrare il prestito e la restituzione
+  bool IsLent() const;
 
-    void SetIsbn(const ISBN &isbn);
+  void LendBook();
 
-    void SetTitle(const std::string &title);
+  void ReturnBook();
 
-    void SetFirstname(const std::string &firstname);
+  // setters
 
-    void SetLastname(const std::string &lastname);
+  void SetIsbn(const ISBN &isbn);
 
-    void SetCopyrightDate(const Date &copyrightDate);
+  void SetTitle(const std::string &title);
+
+  void SetFirstname(const std::string &firstname);
+
+  void SetLastname(const std::string &lastname);
+
+  void SetCopyrightDate(const Date &copyrightDate);
+  Book();
 };
 
 bool operator==(const Book &book, const Book &other);
@@ -67,13 +70,13 @@ bool operator!=(const Book &book, const Book &other);
 
 std::ostream &operator<<(std::ostream &out, Book &book);
 
-
 class BookAlreadyLentException : public std::exception {
-    std::string what_message;
-   public:
-    const char *what() const throw() {
-        return "The book your are trying to lend is already lent";
-    }
+  std::string what_message;
+
+ public:
+  const char *what() const throw() {
+	return "The book your are trying to lend is already lent";
+  }
 };
 
-#endif //LIBRARY_BOOK_H
+#endif//LIBRARY_BOOK_H

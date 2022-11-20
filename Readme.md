@@ -1,26 +1,26 @@
-# A Note about Code Style
-We decided to go for the Google Code Style Guide, with a small change in the 
-naming convention for getters/setter (called accessors/mutators in the guide). We decided to name them 
-using the same convention regular functions  "Ordinarily, functions should start with a capital letter and have a 
-capital letter for each new word." to be more consistent with the overall naming convention. Inspecting some 
-opensource Google C++ code we found that this is the same approach they took in some of their codebases.
+### Una nota riguardo alle scelte progettuali effettuate
 
+### Una nota riguardo alla naming convention utilizzata
+
+Abbiamo deciso di seguire la Google C++ Code Style, con un piccolo cambiamento nella nomenclatura dei getter/setter
+(chiamati accessors/mutators nella guida). Abbiamo utilizzato la stessa nomenclatura utilizzata per le funzioni
+ordinarie ("Functions should start with a capital letter and have a  capital letter for each new word.") per essere 
+più consistenti con la naming convention generale. Dopo aver consultato qualche progetto opensource in C++ di Google 
+abbiamo verificato che questo è lo stesso approccio preso da loro nei progetto che abbiamo consultato.
 
 # How to run
 
 ```bash
-# Clone this repository
+# Clonare questo repository
 $ git clone https://github.com/BIRSAx2/library library
 $ cd library
-# Create build directory if not exists
+# Creare la directory build, se non esiste già
 $ mkdir -p build
 $ cd build
-# Generate build files
-$ cmake ../
-# Build the executable
-$ cmake --build .
 
-# Run the executable
+# Compilare ed lanciare l'eseguibile generato
+$ cmake ../
+$ cmake --build .
 $ ./Library
 
 ```

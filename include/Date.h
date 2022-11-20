@@ -25,7 +25,7 @@ class Date {
   Date(int year, int month, int day);
   Date(const std::string &other);
   Date(const Date &other);
-  Date();
+  Date(); // the date 0000-00-00 indicates that is unknown
 
   // getters
   int GetDay() const {
@@ -51,4 +51,3 @@ bool operator==(Date const &date, Date const &other);
 bool operator!=(Date const &date, Date const &other);
 
 #endif// LIBRARY_DATE_H
-#pragma clang diagnostic pop
