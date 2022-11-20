@@ -1,14 +1,3 @@
-### Note
-- Il costruttore di date a partire da una stringa accetta solo string in formato ISO8601
-
-### Una nota riguardo alla naming convention utilizzata
-
-Abbiamo deciso di seguire la Google C++ Code Style, con un piccolo cambiamento nella nomenclatura dei getter/setter
-(chiamati accessors/mutators nella guida). Abbiamo utilizzato la stessa nomenclatura utilizzata per le funzioni
-ordinarie ("Functions should start with a capital letter and have a capital letter for each new word.") per essere
-più consistenti con la naming convention generale. Dopo aver consultato qualche progetto opensource in C++ di Google
-abbiamo verificato che questo è lo stesso approccio preso da loro nei progetto che abbiamo consultato.
-
 # How to run
 
 ```bash
@@ -22,6 +11,14 @@ $ cd build
 # Compilare ed lanciare l'eseguibile generato
 $ cmake ../
 $ cmake --build .
-$ ./Library
+$ ./library
 
 ```
+
+### Una nota riguardo alla naming convention utilizzata
+
+Abbiamo deciso di seguire la Google C++ Code Style, con un piccolo cambiamento nella nomenclatura dei getter/setter
+(chiamati accessors/mutators nella guida). Abbiamo utilizzato la stessa nomenclatura utilizzata per le funzioni
+ordinarie ("Functions should start with a capital letter and have a capital letter for each new word.") per essere
+più consistenti con la naming convention generale. Dopo aver consultato qualche progetto opensource in C++ di Google
+abbiamo verificato che questo è lo stesso approccio preso da loro nei progetto che abbiamo consultato.
